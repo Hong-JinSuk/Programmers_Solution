@@ -9,7 +9,7 @@ char kakao[8] = { 'A','C','F','J','M','N','R','T' };
 string photo;
 int answer;
 
-void Search(int Len, vector<string> data, string photo) {
+void Search(int Len, vector<string> data) {
 
 	if (Len == sizeof(kakao)) {
 		for (int i = 0; i < data.size(); i++) {
@@ -35,7 +35,7 @@ void Search(int Len, vector<string> data, string photo) {
 		if (isvisited[i]) continue;
 		isvisited[i] = true;
 		photo += kakao[i];
-		Search(Len + 1, data, photo);
+		Search(Len + 1, data);
 		photo.erase(photo.size() - 1);
 		isvisited[i] = false;
 	}
@@ -46,7 +46,7 @@ int solution(int n, vector<string> data) {
 	photo = "";
 	answer = 0;
 	fill(isvisited, isvisited + 8, false);
-	Search(0, data, photo);
+	Search(0, data);
 	return answer;
 
 }
@@ -57,4 +57,5 @@ int main() {
 	cin >> n;
 	vector<string> Data = { "N~F=0", "R~T>2" };
 	cout<< solution(n, Data);
+	
 }
