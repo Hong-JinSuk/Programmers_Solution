@@ -6,13 +6,15 @@ using namespace std;
 
 int MIN = 99999;
 
-// cnt : DFS¿¡¼­ ÀÚ¸´¼ö¿¡ ´õÇØÁÖ±â À§ÇÑ ÆÄ¶ó¹ÌÅÍ
+// cnt : DFSì—ì„œ ìë¦¿ìˆ˜ì— ë”í•´ì£¼ê¸° ìœ„í•œ íŒŒë¼ë¯¸í„°
 void DFS(int storey, int cnt, int ANSWER) {
 
     string str = to_string(storey);
     int str_size = str.size();
 
-    // storey < 0 Á¶°ÇÀÌ ¿Ö ÇÊ¿äÇÒ±î?? ÀÌ°É ¾È³ÖÀ¸¸é 6,10¹ø ÄÉÀÌ½º°¡ Åë°úX
+    // storey < 0 ì¡°ê±´ì´ ì™œ í•„ìš”í• ê¹Œ?? ì´ê±¸ ì•ˆë„£ìœ¼ë©´ 6,10ë²ˆ ì¼€ì´ìŠ¤ê°€ í†µê³¼X
+    // storeyë¥¼ ì¶œë ¥í•´ë³´ë‹ˆ ì‚°ìˆ  ì˜¤ë²„í”Œë¡œìš°ê°€ ë°œìƒí•˜ëŠ”ë°, 1ì–µì´í•˜ì—ì„œ ë°œìƒí•  ì´ìœ ..???
+    // ì›ë˜ëŠ” str[1]=='0' || str[0] == '0' ì´ì˜€ìŒ
     if (storey < 0 || str[0] =='0') {
         if (str[0] - '0' <= 5) ANSWER += str[0] - '0';
         else ANSWER += 10 - (str[0] - '0') + 1;
@@ -20,10 +22,10 @@ void DFS(int storey, int cnt, int ANSWER) {
         return;
     }
 
-    int temp = str[str_size - 1 - cnt] - '0'; // 1ÀÇÀÚ¸®ºÎÅÍ
-    // ´õÇØ¼­ 0À» ¸¸µé¾îÁÜ
+    int temp = str[str_size - 1 - cnt] - '0'; // 1ì˜ìë¦¬ë¶€í„°
+    // ë”í•´ì„œ 0ì„ ë§Œë“¤ì–´ì¤Œ
     DFS(storey + (10 - temp) * pow(10, cnt), cnt + 1, ANSWER + 10 - temp);
-    // »©¼­ 0À» ¸¸µé¾îÁÜ
+    // ë¹¼ì„œ 0ì„ ë§Œë“¤ì–´ì¤Œ
     DFS(storey - temp * pow(10, cnt), cnt + 1, ANSWER + temp);
 
     return;
